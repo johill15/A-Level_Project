@@ -19,3 +19,4 @@ def artistrelated():
     print(relatedartist)
 artistalbums()
 
+
