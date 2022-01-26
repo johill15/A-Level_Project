@@ -18,3 +18,4 @@ def artistrelated():
     relatedartist = spotify.artist_related_artists(artisturi)
     print(relatedartist)
 artistalbums()
+
