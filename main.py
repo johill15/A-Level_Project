@@ -3,6 +3,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 def artistalbums():
     artisturi = input('Choose an artist to see their albums: ')
+    spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
+
     results = spotify.artist_albums(artisturi, album_type='album')
     albums = results['items']
     while results['next']:
@@ -15,8 +17,6 @@ def artistalbums():
 
 def artistrelated():
     artisturi = input('Choose an artist to see their related artists: ')
-    relatedartist = spotify.artist_related_artists(artisturi)
+    relatedartist = spotipy.artist_related_artists(artisturi)
     print(relatedartist)
 artistalbums()
-
-
