@@ -1,32 +1,62 @@
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
-spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
-#todo: Fill in details of functions
+import pygame
+import tkinter as tkr
+from tkinter.filedialog import askdirectory
+import os
 
-def artistalbums():
-    """
-    shows the albums from the artist that is chosen
-    :return: the albums of the artist
-    """
-    artisturi = input('Choose an artist to see their albums: ')
-    results = spotify.artist_albums(artisturi, album_type='album')
-    albums = results['items']
-    while results['next']:
-        results = spotify.next(results)
-        albums.extend(results['items'])
+music_player = tkr.Tk()
+music_player.title("Music Player")
+music_player.geometry("500x400")
 
-    for album in albums:
-         print(album['name'])
+directory = askdirectory()
+os.chdir(directory)
+song_list = os.listdir()
 
+playlist = tkr.Listbox(music_player, font = "Verdana 12 bold",
+                       fg = "navy", bg = "gold", selectmode = tkr.SINGLE)
 
-def artistrelated():
-    """
-    shows the related artists from the chosen artist
-    :return: the related artist
-    """
-    artisturi = input('Choose an artist to see their related artists: ')
-    relatedartist = spotify.artist_related_artists(artisturi)
-    print(relatedartist)
+x = 0
+for i in song_list:
+    playlist.insert(x,i)
+    x += 1
 
+pygame.init()
+pygame.mixer.init()
 
-artistrelated()
+def play():
+    pygame.mixer.music.load(playlist.get(tkr.ACTIVE))
+    var.set(playlist.get(tkr.ACTIVE))
+    pygame.mixer.music.play()
+
+def stop():
+    pygame.mixer.music.stop()
+
+def pause():
+    pygame.mixer.music.pause()
+
+def unpause():
+    pygame.mixer.music.unpause()
+
+Button1 = tkr.Button(music_player, width = 5, height = 3,
+                     font = "Verdana 12 bold", text = "PLAY",
+                     command = play, bg = "navy", fg = "gold")
+Button2 = tkr.Button(music_player, width = 5, height = 3,
+                     font = "Verdana 12 bold", text = "STOP",
+                     command = play, bg = "navy", fg = "gold")
+Button3 = tkr.Button(music_player, width = 5, height = 3,
+                     font = "Verdana 12 bold", text = "PAUSE",
+                     command = play, bg = "navy", fg = "gold")
+Button4 = tkr.Button(music_player, width = 5, height = 3,
+                     font = "Verdana 12 bold", text = "PLAY",
+                     command = play, bg = "navy", fg = "UNPAUSE")
+
+var = tkr.StringVar()
+song._title = tkr.Label(music.player, font = "Verdana 12 bold", textvariable = var)
+
+song_title.pack()
+Button1.pack(fill = "x")
+Button2.pack(fill = "x")
+Button3.pack(fill = "x")
+Button4.pack(fill = "x")
+playlist.pack(fill = "both", expand = "yes")
+
+music_player.mainloop()
