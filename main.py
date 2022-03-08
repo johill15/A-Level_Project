@@ -10,10 +10,10 @@ music_player.geometry("500x400")
 directory = askdirectory()
 os.chdir(directory)
 song_list = os.listdir()
-
+# make a list that only lists possible values (mp3, wav, ogg)
 playlist = tkr.Listbox(music_player, font = "Verdana 12 bold",
                        fg = "navy", bg = "gold", selectmode = tkr.SINGLE)
-
+print (playlist)
 x = 0
 for i in song_list:
     playlist.insert(x,i)
@@ -46,11 +46,11 @@ Button3 = tkr.Button(music_player, width = 5, height = 3,
                      font = "Verdana 12 bold", text = "PAUSE",
                      command = play, bg = "navy", fg = "gold")
 Button4 = tkr.Button(music_player, width = 5, height = 3,
-                     font = "Verdana 12 bold", text = "PLAY",
-                     command = play, bg = "navy", fg = "UNPAUSE")
+                     font = "Verdana 12 bold", text = "UNPAUSE",
+                     command = play, bg = "navy", fg = "gold")
 
 var = tkr.StringVar()
-song._title = tkr.Label(music.player, font = "Verdana 12 bold", textvariable = var)
+song_title = tkr.Label(music_player, font = "Verdana 12 bold", textvariable = var)
 
 song_title.pack()
 Button1.pack(fill = "x")
